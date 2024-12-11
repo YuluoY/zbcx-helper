@@ -9,7 +9,7 @@ import { indexConfig } from './modules/cx/index';
 import * as path from 'path';
 import * as fs from 'fs';
 import { getModulesByLanguage, getModuleByTrigger } from './moduleConfigs';
-import { buttonConfig } from './configs/cxcoms/button';
+import { getComponentCompletionItems, getComponentDocumentation } from './modules/cxcoms';
 
 let cxData: ModuleConfigItem = indexConfig;
 
@@ -262,33 +262,25 @@ const tagCompletionProvider = vscode.languages.registerCompletionItemProvider(
 				return undefined;
 			}
 
-			const completionItems = [];
+			// 获取所有组件的补全项
+			const componentItems = getComponentCompletionItems().map(item => {
+				const completionItem = new vscode.CompletionItem(item.label);
+				completionItem.kind = vscode.CompletionItemKind.Snippet;
+				completionItem.detail = item.detail;
+				completionItem.documentation = new vscode.MarkdownString(item.documentation);
+				completionItem.insertText = new vscode.SnippetString(item.insertText);
+				completionItem.preselect = true;
+				completionItem.sortText = 'a';  // 确保排在前面
+				return completionItem;
+			});
 			
-			// 添加按钮组件
-			const buttonItem = new vscode.CompletionItem('cx-button');
-			buttonItem.kind = vscode.CompletionItemKind.Snippet;
-			buttonItem.detail = "智博创享按钮组件";
-			buttonItem.documentation = new vscode.MarkdownString(
-				"智博创享按钮组件\n\n" +
-				"**属性**:\n" +
-				"- type: 按钮类型 (primary/success/warning/danger/info)\n\n" +
-				"**示例**:\n" +
-				"```html\n" +
-				"<cx-button type=\"primary\">按钮</cx-button>\n" +
-				"```"
-			);
-			buttonItem.insertText = new vscode.SnippetString('<cx-button type="${1|primary,success,warning,danger,info|}">${2:按钮}</cx-button>');
-			buttonItem.preselect = true;
-			buttonItem.sortText = 'a';  // 确保排在前面
-			completionItems.push(buttonItem);
-			
-			return completionItems;
+			return componentItems;
 		}
 	},
 	'<', 'c', 'x', '-'  // 触发字符
 );
 
-// 注组件标签悬浮提示
+// 注册组件标签悬浮提示
 const tagHoverProvider = vscode.languages.registerHoverProvider(
 	[
 		{ scheme: 'file', language: 'html' },
@@ -302,9 +294,10 @@ const tagHoverProvider = vscode.languages.registerHoverProvider(
 			}
 
 			const word = document.getText(wordRange);
-			if (word === buttonConfig.tag) {
+			const documentation = getComponentDocumentation(word);
+			if (documentation) {
 				const markdown = new vscode.MarkdownString();
-				markdown.appendMarkdown(buttonConfig.documentation.value);
+				markdown.appendMarkdown(documentation);
 				return new vscode.Hover(markdown);
 			}
 
@@ -396,7 +389,13 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('zbcx-helper 已激活');
 	console.log('当前工作目录:', __dirname);
 
+	// 注册zbcx命令
+	let zbcxCommand = vscode.commands.registerCommand('zbcx-helper.zbcx', () => {
+		vscode.window.showInformationMessage('欢迎使用zbcx-helper v1.0.0');
+	});
+
 	context.subscriptions.push(
+		zbcxCommand,
 		cxTriggerProvider, 
 		provider, 
 		subModuleProvider, 

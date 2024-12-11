@@ -1,26 +1,52 @@
 /**
- * 智博创享组件库
- * @module cxcoms
+ * 组件配置管理模块
  */
 
-import type { ModuleConfigItem } from '../../types';
-import { MODULE_KINDS, DOCUMENTATION } from '../../constants';
+import { ModuleConfigItem } from '../../types';
 import { indexConfig as buttonConfig } from './components/button';
 
-// 导出配置
-const indexConfig: ModuleConfigItem = {
-  type: MODULE_KINDS.MODULE,
-  label: "cxcoms",
-  kind: MODULE_KINDS.MODULE,
-  detail: "智博创享组件库",
-  documentation: {
-    kind: DOCUMENTATION.MARKDOWN,
-    value: "提供智博创享系统的UI组件库。"
-  },
-  children: {
-    button: buttonConfig
-  }
+// 组件配置映射
+export const componentConfigs: Record<string, ModuleConfigItem> = {
+  'cx-button': buttonConfig
 };
 
-export { indexConfig };
-module.exports = { indexConfig }; 
+// 获取组件配置
+export function getComponentConfig(tagName: string): ModuleConfigItem | undefined {
+  return componentConfigs[tagName];
+}
+
+// 获取所有组件配置
+export function getAllComponentConfigs(): Record<string, ModuleConfigItem> {
+  return componentConfigs;
+}
+
+// 获取组件文档
+export function getComponentDocumentation(tagName: string): string | undefined {
+  const config = componentConfigs[tagName];
+  return config?.documentation?.value;
+}
+
+// 获取组件补全项
+export function getComponentCompletionItems(): Array<{
+  label: string;
+  detail: string;
+  documentation: string;
+  insertText: string;
+}> {
+  return Object.entries(componentConfigs).map(([tagName, config]) => ({
+    label: tagName,
+    detail: config.detail || '',
+    documentation: config.documentation?.value || '',
+    insertText: getComponentInsertText(tagName, config)
+  }));
+}
+
+// 获取组件插入文本
+function getComponentInsertText(tagName: string, config: ModuleConfigItem): string {
+  switch(tagName) {
+    case 'cx-button':
+      return '<cx-button type="${1|primary,success,warning,danger,info|}">${2:按钮}</cx-button>';
+    default:
+      return `<${tagName}>\${1:内容}</${tagName}>`;
+  }
+} 
