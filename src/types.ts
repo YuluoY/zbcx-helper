@@ -110,6 +110,8 @@ export interface FunctionConfigItem extends BaseConfigItem {
     parameters?: Parameter[];
     /** 返回值类型 */
     returnType?: ReturnType;
+    /** 排序文本 */
+    sortText?: string;
 }
 
 /**

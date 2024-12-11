@@ -1,6 +1,6 @@
 # 智博创享代码补全插件
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)
 ![VS Code](https://img.shields.io/badge/VS%20Code-1.60+-green.svg)
 ![License](https://img.shields.io/badge/license-Apache--2.0-orange.svg)
 
@@ -137,3 +137,9 @@ npm run package:major "重大更新：xxx"
 
 ### v1.1.0 (2024-12-12)
 - 新增版本号控制，修改协议
+
+### v1.1.1 (2024-12-12)
+- 修复命令提示消息
+
+### v1.1.2 (2024-12-12)
+- 修复补全代码排序

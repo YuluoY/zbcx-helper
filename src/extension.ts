@@ -33,7 +33,7 @@ function loadConfig(configPath: string): ConfigItem | undefined {
 			return undefined;
 		}
 
-		// 查找以 Config 结尾的导出
+		// 查找以 Config 结���导出
 		const configKey = Object.keys(config).find(key => key.endsWith('Config'));
 		if (!configKey) {
 			console.log('No config export found in:', configPath);
@@ -315,7 +315,7 @@ function getCompletionItems(data: ConfigItem): vscode.CompletionItem[] {
 	if ('children' in data) {
 		for (const [key, value] of Object.entries(data.children)) {
 			const item = new vscode.CompletionItem(key);
-			
+
 			if (typeof value === 'string') {
 				console.log('String child is not supported anymore');
 				continue;
@@ -326,30 +326,8 @@ function getCompletionItems(data: ConfigItem): vscode.CompletionItem[] {
 					item.documentation = createMarkdownString(value);
 				}
 				
-				// 按类型设置优先级：Variable > Module > Function/Method
-				if (value.kind === 'Variable') {
-					item.sortText = '!' + key; // Variable最高优先级
-				} else if (value.kind === 'Module') {
-					item.sortText = '!!' + key; // Module次高优先级
-				} else if (value.kind === 'Function' || value.kind === 'Method') {
-					item.sortText = '!!!' + key; // Function和Method第三优先级
-				} else {
-					item.sortText = '!!!!' + key; // 其他最低优先级
-				}
-				
-				// 为常用项设置预选
-				if (
-					key === 'cx' || 
-					key === 'svr' || 
-					key.startsWith('svr.') || 
-					key.includes('query') || 
-					key.includes('add') || 
-					key.includes('update') ||
-					key.includes('delete') ||
-					key.includes('get')
-				) {
-					item.preselect = true;
-				}
+				item.sortText = '0';
+				item.preselect = true;
 			}
 			
 			items.push(item);
