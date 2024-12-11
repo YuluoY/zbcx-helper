@@ -10,6 +10,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { getModulesByLanguage, getModuleByTrigger } from './moduleConfigs';
 import { getComponentCompletionItems, getComponentDocumentation } from './modules/cxcoms';
+import pkg from '../package.json';
 
 let cxData: ModuleConfigItem = indexConfig;
 
@@ -418,7 +419,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// 注册zbcx命令
 	let zbcxCommand = vscode.commands.registerCommand('zbcx-helper.zbcx', () => {
-		vscode.window.showInformationMessage('欢迎使用zbcx-helper v1.0.0');
+		vscode.window.showInformationMessage(`欢迎使用${pkg.displayName} v${pkg.version}`);
 	});
 
 	context.subscriptions.push(
