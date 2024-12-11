@@ -2,26 +2,33 @@
   "name": "zbcx-helper",
   "displayName": "智博创享助手",
   "description": "智博创享Web产品研发代码补全智能提示插件",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "EricHu",
   "author": {
     "name": "Eric Hu",
     "email": "568055454@qq.com"
   },
   "engines": {
-    "vscode": "^1.54.0"
+    "vscode": "^1.73.0"
   },
   "categories": [
     "Programming Languages",
     "Snippets",
     "Other"
   ],
+  "keywords": [
+    "智博创享",
+    "代码补全",
+    "智能提示",
+    "Vue",
+    "JavaScript"
+  ],
   "activationEvents": [
     "onLanguage:javascript",
     "onLanguage:vue"
   ],
   "main": "./dist/extension.js",
-  "icon": "images/logo.png",
+  "icon": "images/icon.svg",
   "contributes": {
     "languages": [
       {
