@@ -96,6 +96,8 @@ const cxTriggerProvider = vscode.languages.registerCompletionItemProvider(
 				const cxItem = new vscode.CompletionItem('cx');
 				cxItem.kind = vscode.CompletionItemKind.Module;
 				cxItem.detail = '智博创享基础模块';
+				cxItem.sortText = '0'; // 添加最高优先级
+				cxItem.preselect = true; // 设置为预选项
 				return [cxItem];
 			}
 			return undefined;
@@ -321,6 +323,31 @@ function getCompletionItems(data: ConfigItem): vscode.CompletionItem[] {
 				item.detail = value.detail;
 				if ('documentation' in value && typeof value.documentation === 'object') {
 					item.documentation = createMarkdownString(value);
+				}
+				
+				// 按类型设置优先级：Variable > Module > Function/Method
+				if (value.kind === 'Variable') {
+					item.sortText = '!' + key; // Variable最高优先级
+				} else if (value.kind === 'Module') {
+					item.sortText = '!!' + key; // Module次高优先级
+				} else if (value.kind === 'Function' || value.kind === 'Method') {
+					item.sortText = '!!!' + key; // Function和Method第三优先级
+				} else {
+					item.sortText = '!!!!' + key; // 其他最低优先级
+				}
+				
+				// 为常用项设置预选
+				if (
+					key === 'cx' || 
+					key === 'svr' || 
+					key.startsWith('svr.') || 
+					key.includes('query') || 
+					key.includes('add') || 
+					key.includes('update') ||
+					key.includes('delete') ||
+					key.includes('get')
+				) {
+					item.preselect = true;
 				}
 			}
 			

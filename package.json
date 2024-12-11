@@ -65,7 +65,6 @@
     "watch": "tsc -watch -p ./",
     "package": "vsce package --no-dependencies",
     "publish": "vsce publish",
-    "convert": "node scripts/jsonToTs.js",
     "login": "vsce login EricHu"
   },
   "devDependencies": {
