@@ -1,0 +1,77 @@
+{
+  "name": "zbcx-helper",
+  "displayName": "智博创享助手",
+  "description": "智博创享Web产品研发代码补全智能提示插件",
+  "version": "0.0.1",
+  "publisher": "EricHu",
+  "author": {
+    "name": "Eric Hu",
+    "email": "568055454@qq.com"
+  },
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:vue"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "images/logo.png",
+  "contributes": {
+    "languages": [
+      {
+        "id": "javascript",
+        "extensions": [
+          ".js"
+        ],
+        "aliases": [
+          "JavaScript"
+        ]
+      },
+      {
+        "id": "vue",
+        "extensions": [
+          ".vue"
+        ],
+        "aliases": [
+          "Vue"
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "zbcx-helper.showInfo",
+        "title": "zbcx"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run build",
+    "build": "tsc -p ./ && tsc-alias -p tsconfig.json && node scripts/copyFiles.js",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "convert": "node scripts/jsonToTs.js"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.34",
+    "@types/vscode": "^1.73.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "@vscode/vsce": "^2.24.0",
+    "eslint": "^8.54.0",
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YuluoY/zbcx-helper"
+  },
+  "license": "MIT"
+}
