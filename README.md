@@ -86,7 +86,7 @@ cx.svr.data.update()
 如果您在使用过程中遇到任何问题，或有任何建议，请通过以下方式反馈：
 
 1. 在 GitHub 上提交 Issue
-2. 发送邮件至 support@example.com
+2. 发送邮件至 568055454@qq.com
 
 ## 📄 许可证
 
