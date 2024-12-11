@@ -1,9 +1,11 @@
-# Change Log
+# 更新日志
 
-All notable changes to the "code" extension will be documented in this file.
+## [1.0.0] - 2023-12-12
+- 实现基础模块代码补全
+- 实现服务器模块代码补全
+- 实现UI组件代码补全
+- 添加智能文档提示
+- 优化代码片段体验
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+## [1.1.0] - 2024-12-12
+- 新增版本号控制，修改协议

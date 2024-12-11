@@ -2,7 +2,7 @@
   "name": "zbcx-helper",
   "displayName": "智博创享助手",
   "description": "智博创享Web产品研发代码补全智能提示插件",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "EricHu",
   "author": {
     "name": "Eric Hu",
@@ -63,8 +63,12 @@
     "vscode:prepublish": "pnpm run build",
     "build": "tsc -p ./ && tsc-alias -p tsconfig.json && node scripts/copyFiles.js",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package --no-dependencies",
-    "publish": "vsce publish",
+    "package:patch": "node scripts/version-bump.js patch",
+    "package:minor": "node scripts/version-bump.js minor",
+    "package:major": "node scripts/version-bump.js major",
+    "publish:patch": "node scripts/version-bump.js patch && vsce publish",
+    "publish:minor": "node scripts/version-bump.js minor && vsce publish",
+    "publish:major": "node scripts/version-bump.js major && vsce publish",
     "login": "vsce login EricHu"
   },
   "devDependencies": {
@@ -73,14 +77,16 @@
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "@vscode/vsce": "^2.24.0",
+    "cross-var": "^1.1.0",
     "eslint": "^8.54.0",
     "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.2",
+    "semver": "^7.5.4"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/YuluoY/zbcx-helper"
   },
-  "license": "MIT"
+  "license": "Apache-2.0"
 }

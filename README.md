@@ -1,8 +1,8 @@
 # 智博创享代码补全插件
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![VS Code](https://img.shields.io/badge/VS%20Code-1.60+-green.svg)
-![License](https://img.shields.io/badge/license-MIT-orange.svg)
+![License](https://img.shields.io/badge/license-Apache--2.0-orange.svg)
 
 ## 📝 简介
 
@@ -59,16 +59,45 @@ cx.svr.data.update()
 <cx-button type="primary">按钮</cx-button>
 ```
 
-## 📖 补全规则
+## 📖 打包与发布
 
-### 触发字符
-- 基础模块：`cx.`
-- 组件模块：`<`, `<c`, `<cx`, `cx-`
+### 版本控制
+插件使用语义化版本控制，提供三种版本更新方式：
 
-### 补全类型
-- 函数：显示为紫色图标
-- 变量：显示为蓝色方块图标
-- 组件：显示为代码片段图标
+#### 1. 修复bug (patch)
+增加补丁版本号（如 1.0.0 -> 1.0.1）
+```bash
+# 使用默认消息
+npm run package:patch
+
+# 使用自定义消息
+npm run package:patch "修复了xxx的问题"
+```
+
+#### 2. 新特性 (minor)
+增加次版本号，补丁号归零（如 1.0.1 -> 1.1.0）
+```bash
+# 使用默认消息
+npm run package:minor
+
+# 使用自定义消息
+npm run package:minor "添加了xxx功能"
+```
+
+#### 3. 版本升级 (major)
+增加主版本号，次版本号和补丁号归零（如 1.1.1 -> 2.0.0）
+```bash
+# 使用默认消息
+npm run package:major
+
+# 使用自定义消息
+npm run package:major "重大更新：xxx"
+```
+
+每次版本更新会自动：
+- 更新版本号
+- 生成更新日志（使用自定义消息或默认消息）
+- 更新文档
 
 ## 🛠️ 配置选项
 
@@ -90,13 +119,21 @@ cx.svr.data.update()
 
 ## 📄 许可证
 
-本项目基于 MIT 许可证开源。
+本项目基于 Apache License 2.0 许可证开源。使用本项目代码需要：
+
+1. 保留原始版权声明
+2. 声明对代码的重大修改
+3. 在延伸的代码中包含许可证副本
+4. 如需修改和分发代码，需要获得许可
 
 ## 🔄 更新日志
 
-### v1.0.0
+### v1.0.0 (2023-12-12)
 - 实现基础模块代码补全
 - 实现服务器模块代码补全
 - 实现UI组件代码补全
 - 添加智能文档提示
 - 优化代码片段体验
+
+### v1.1.0 (2024-12-12)
+- 新增版本号控制，修改协议
