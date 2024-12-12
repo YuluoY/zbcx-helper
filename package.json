@@ -2,7 +2,7 @@
   "name": "zbcx-helper",
   "displayName": "智博创享助手",
   "description": "智博创享Web产品研发代码补全智能提示插件",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "publisher": "EricHu",
   "author": {
     "name": "Eric Hu",
@@ -66,9 +66,10 @@
     "package:patch": "node scripts/version-bump.js patch",
     "package:minor": "node scripts/version-bump.js minor",
     "package:major": "node scripts/version-bump.js major",
-    "publish:patch": "node scripts/version-bump.js patch && vsce publish",
-    "publish:minor": "node scripts/version-bump.js minor && vsce publish",
-    "publish:major": "node scripts/version-bump.js major && vsce publish",
+    "package:revert": "node scripts/version-bump.js revert",
+    "publish:patch": "node scripts/version-bump.js patch && vsce package",
+    "publish:minor": "node scripts/version-bump.js minor && vsce package",
+    "publish:major": "node scripts/version-bump.js major && vsce package",
     "login": "vsce login EricHu"
   },
   "devDependencies": {

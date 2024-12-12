@@ -1,6 +1,6 @@
 # 智博创享代码补全插件
 
-![Version](https://img.shields.io/badge/version-1.1.2-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
 ![VS Code](https://img.shields.io/badge/VS%20Code-1.60+-green.svg)
 ![License](https://img.shields.io/badge/license-Apache--2.0-orange.svg)
 
@@ -68,9 +68,6 @@ cx.svr.data.update()
 增加补丁版本号（如 1.0.0 -> 1.0.1）
 ```bash
 # 使用默认消息
-npm run package:patch
-
-# 使用自定义消息
 npm run package:patch "修复了xxx的问题"
 ```
 
@@ -78,9 +75,6 @@ npm run package:patch "修复了xxx的问题"
 增加次版本号，补丁号归零（如 1.0.1 -> 1.1.0）
 ```bash
 # 使用默认消息
-npm run package:minor
-
-# 使用自定义消息
 npm run package:minor "添加了xxx功能"
 ```
 
@@ -88,10 +82,14 @@ npm run package:minor "添加了xxx功能"
 增加主版本号，次版本号和补丁号归零（如 1.1.1 -> 2.0.0）
 ```bash
 # 使用默认消息
-npm run package:major
-
-# 使用自定义消息
 npm run package:major "重大更新：xxx"
+```
+
+#### 4. 版本回退 (revert)
+回退到上一个版本，并删除当前版本的更新记录
+```bash
+# 回退到上一个版本
+npm run package:revert
 ```
 
 每次版本更新会自动：
@@ -143,3 +141,6 @@ npm run package:major "重大更新：xxx"
 
 ### v1.1.2 (2024-12-12)
 - 修复补全代码排序
+
+### v1.2.0 (2024-12-12)
+- 新增版本回退功能
