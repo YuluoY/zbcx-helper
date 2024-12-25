@@ -5,7 +5,7 @@ import { loadComponentDocs } from "../../../../utils/docs";
  * @module bytesToStr
  */
 
-import { ConfigItem, FunctionConfigItem, ModuleConfigItem } from "../../../../types";
+import { FunctionConfigItem } from "../../../../types";
 import { MODULE_KINDS, DOCUMENTATION } from "../../../../constants";
 
 export const bytesToStrConfig: FunctionConfigItem = {

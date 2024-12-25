@@ -1,0 +1,53 @@
+# Consts 类
+
+Consts 类提供了系统中使用的各种常量定义。
+
+## 常量分类
+
+### [对齐相关](align/README.md)
+包含 ALIGN_BOTTOM、ALIGN_CENTER、ALIGN_LEFT、ALIGN_MIDDLE、ALIGN_RIGHT、ALIGN_TOP 等对齐方式常量。
+
+### [数据库相关](database/README.md)
+包含 DB_MSSQL、DB_MYSQL、DB_ORACLE、DB_POSTGRESQL 等数据库类型常量。
+
+### [显示类型相关](display/README.md)
+包含 DISP_AUDIO、DISP_AUTOCODE、DISP_CHECKBOX、DISP_DATE、DISP_DATEYEAR、DISP_DROPDOWN 等显示类型常量。
+
+### [实体类型相关](entity/README.md)
+包含 ENTITY_LIN、ENTITY_NOTE、ENTITY_PNT、ENTITY_REG、ENTITY_TABLE 等实体类型常量。
+
+### [文件类型相关](file/README.md)
+包含 FILE_AUDIO、FILE_DOC、FILE_IMG、FILE_VIDEO 等文件类型常量。
+
+### [分组相关](group/README.md)
+包含 GROUP_DATE、GROUP_IN、GROUP_MONTH、GROUP_RANGE、GROUP_TIME、GROUP_VALUE、GROUP_YEAR 等分组类型常量。
+
+### [级别相关](level/README.md)
+包含 LEVEL_DANGER、LEVEL_EMPHASIZE、LEVEL_NORMAL、LEVEL_WARN 等级别常量。
+
+### [登录相关](login/README.md)
+包含 LOGIN_ACCOUNT、LOGIN_CELL、LOGIN_MAIL、LOGIN_QQ、LOGIN_SCAN、LOGIN_WX 等登录方式常量。
+
+### [地图相关](maps/README.md)
+包含 MAPS_ICON、MAPS_MODEL、MAPS_SYMBOL、MAPS_VECTOR 等地图类型常量。
+
+### [模式相关](mode/README.md)
+包含 MODE_EDIT、MODE_VIEW 等模式常量。
+
+### [流程相关](process/README.md)
+包含 PROC_HANDLE、PROC_PROGRESS、PROC_START、PROC_TRACE 等流程相关常量。
+
+### [规则相关](rule/README.md)
+包含 RULE_CHANGE、RULE_FINISH、RULE_INIT、RULE_INITNEW、RULE_INITOLD 等规则相关常量。
+
+### [场景相关](scene/README.md)
+包含 SCENE_23D、SCENE_2D、SCENE_3D 等场景类型常量。
+
+### [状态相关](status/README.md)
+包含 ST_DEFAULT、ST_FAIL、ST_LOADING、ST_SUCCESS 等状态常量。
+
+### [服务相关](service/README.md)
+包含 SVR_ADD、SVR_DEL、SVR_PROC、SVR_QRY、SVR_QRYID、SVR_QRYID0 等服务类型常量。
+
+### [UI相关](ui/README.md)
+包含 UI_COM、UI_DIALOG、UI_NONE、UI_ROUTE 等UI类型常量。 

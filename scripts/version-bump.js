@@ -68,18 +68,12 @@ function updateVersion(type, message) {
 
         // 更新 README.md
         let readmeContent = readFile(readmePath);
-        
-        // 更新版本号
         readmeContent = readmeContent.replace(
             /version-\d+\.\d+\.\d+-blue/,
             `version-${newVersion}-blue`
         );
-        
-        // 在更新日志部分添加新版本信息
         const date = new Date().toISOString().split('T')[0];
         const readmeEntry = `\n\n### v${newVersion} (${date})\n- ${message}`;
-        
-        // 直接将新的更新日志追加到文件末尾
         readmeContent = readmeContent.trim() + readmeEntry + '\n';
 
         // 更新 CHANGELOG.md
@@ -165,15 +159,12 @@ function main() {
 
             // 更新 README.md
             let readmeContent = readFile(readmePath);
-            // 更新版本号
             readmeContent = readmeContent.replace(
                 /version-\d+\.\d+\.\d+-blue/,
                 `version-${previousVersion}-blue`
             );
-            // 删除最后一个版本的更新日志
             const readmeVersionPattern = new RegExp(`### v${currentVersion} \\([^)]+\\)[^]*?(?=###|$)`);
             readmeContent = readmeContent.replace(readmeVersionPattern, '');
-            // 移除多余的空行
             readmeContent = readmeContent.replace(/\n{3,}/g, '\n\n');
             writeFile(readmePath, readmeContent);
 

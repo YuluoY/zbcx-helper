@@ -29,6 +29,7 @@
     "onCommand:zbcx-helper.zbcx"
   ],
   "main": "./dist/extension.js",
+  "types": "./dist/types/index.d.ts",
   "icon": "images/logo.png",
   "contributes": {
     "languages": [

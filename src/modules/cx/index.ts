@@ -5,9 +5,15 @@
 
 import type { ModuleConfigItem } from '../../types';
 import { MODULE_KINDS, DOCUMENTATION } from '../../constants';
-import { indexConfig as baseConfig } from './base';
-import { indexConfig as svrConfig } from './svr';
-import { indexConfig as localCacheConfig } from './localCache';
+import { indexConfig as baseConfig } from './Base';
+import { indexConfig as svrConfig } from './Svr';
+import { indexConfig as localCacheConfig } from './LocalCache';
+import { indexConfig as arrayConfig } from './Array';
+import { indexConfig as attConfig } from './Att';
+import { indexConfig as attBaseConfig } from './AttBase';
+import { indexConfig as attFactoryConfig } from './AttFactory';
+import { indexConfig as bpmConfig } from './Bpm';
+import { indexConfig as cacheLruConfig } from './CacheLru';
 
 // 导出配置
 const indexConfig: ModuleConfigItem = {
@@ -22,7 +28,13 @@ const indexConfig: ModuleConfigItem = {
   children: {
     base: baseConfig,
     svr: svrConfig,
-    localCache: localCacheConfig
+    localCache: localCacheConfig,
+    array: arrayConfig,
+    att: attConfig,
+    AttBase: attBaseConfig,
+    AttFactory: attFactoryConfig,
+    Bpm: bpmConfig,
+    CacheLru: cacheLruConfig
   }
 };
 

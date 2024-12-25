@@ -5,7 +5,7 @@
 
 import type { ModuleConfigItem } from '../../../types';
 import { MODULE_KINDS, DOCUMENTATION } from '../../../constants';
-import { indexConfig as dataConfig } from './data';
+import { indexConfig as dataConfig } from './Data';
 
 // 导出配置
 const indexConfig: ModuleConfigItem = {
