@@ -29,6 +29,20 @@
 
 ## 🚀 快速开始
 
+### npm引入
+
+```bash
+npm install zbcx-helper
+```
+- jsconfig.json文件
+```json
+{
+  "compilerOptions": {
+    "types": ["./node_modules/zbcx-helper"]
+  }
+}
+```
+
 ### 安装
 1. 打开 VS Code
 2. 按下 `Ctrl+P` 打开命令面板

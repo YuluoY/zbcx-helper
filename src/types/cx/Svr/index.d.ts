@@ -15,26 +15,21 @@
 /// <reference path="./Train/index.d.ts" />
 /// <reference path="./Upload/index.d.ts" />
 
-declare namespace cx {
-  /**
-   * 服务器交互模块
-   */
-  namespace svr {
-    export { attOper } from './AttOper';
-    export { auth } from './Auth';
-    export { bpm } from './Bpm';
-    export { data } from './Data';
-    export { doc } from './Doc';
-    export { feature } from './Feature';
-    export { file } from './File';
-    export { fulltext } from './FullText';
-    export { grpc } from './Grpc';
-    export { imp } from './Imp';
-    export { login } from './Login';
-    export { mail } from './Mail';
-    export { network } from './Network';
-    export { rpt } from './Rpt';
-    export { train } from './Train';
-    export { upload } from './Upload';
-  }
-} 
+declare namespace cx.svr {
+  export { attOper } from './AttOper';
+  export { auth } from './Auth';
+  export { bpm } from './Bpm';
+  export { data } from './Data';
+  export { doc } from './Doc';
+  export { feature } from './Feature';
+  export { file } from './File';
+  export { fullText } from './FullText';
+  export { grpc } from './Grpc';
+  export { imp } from './Imp';
+  export { login } from './Login';
+  export { mail } from './Mail';
+  export { network } from './Network';
+  export { rpt } from './Rpt';
+  export { train } from './Train';
+  export { upload } from './Upload';
+}
