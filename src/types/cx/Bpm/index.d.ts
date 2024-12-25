@@ -2,7 +2,7 @@
  * cx.Bpm 类 - 流程管理相关的功能类
  */
 declare namespace cx {
-  interface BpmInstance {
+  declare class Bpm {
     /**
      * 根据proc(表proc)启动流程(需要取流程定义,最后再启动)
      * @param proc - 流程信息
@@ -22,8 +22,8 @@ declare namespace cx {
      * });
      * ```
      */
-    startByProc(proc: Object, variables?: Object): Promise<Object>;
-
+    static startByProc(proc: Object, variables?: Object): Promise<Object>;
+  
     /**
      * 提交任务反馈意见
      * @param params - 参数对象，包含id(任务ID)、backto(退回任务ID)、COMMENT_(反馈意见)
@@ -38,8 +38,8 @@ declare namespace cx {
      * });
      * ```
      */
-    commentApply(params: Object): Object;
-
+    static commentApply(params: Object): Object;
+  
     /**
      * 根据流程实例查看流程进展
      * @param procInst - 流程实例信息
@@ -52,8 +52,8 @@ declare namespace cx {
      * }, "myPlugin");
      * ```
      */
-    procProgressByProcInst(procInst: Object, plugin: string): void;
-
+    static procProgressByProcInst(procInst: Object, plugin: string): void;
+  
     /**
      * 根据任务查看流程进展
      * @param task - 任务信息
@@ -66,8 +66,8 @@ declare namespace cx {
      * }, "myPlugin");
      * ```
      */
-    procProgressByTask(task: Object, plugin: string): void;
-
+    static procProgressByTask(task: Object, plugin: string): void;
+  
     /**
      * 根据流程实例查看流程跟踪图
      * @param procInst - 流程实例信息
@@ -80,8 +80,8 @@ declare namespace cx {
      * }, "myPlugin");
      * ```
      */
-    procTraceByProcInst(procInst: Object, plugin: string): void;
-
+    static procTraceByProcInst(procInst: Object, plugin: string): void;
+  
     /**
      * 根据任务查看流程跟踪图
      * @param task - 任务信息
@@ -94,8 +94,8 @@ declare namespace cx {
      * }, "myPlugin");
      * ```
      */
-    procTraceByTask(task: Object, plugin: string): void;
-
+    static procTraceByTask(task: Object, plugin: string): void;
+  
     /**
      * 指派给某人
      * @param params - 指派参数
@@ -107,8 +107,8 @@ declare namespace cx {
      * });
      * ```
      */
-    assignTo(params: Object): void;
-
+    static assignTo(params: Object): void;
+  
     /**
      * 根据流程ID取流程的Key
      * @param procId - 流程ID
@@ -118,8 +118,8 @@ declare namespace cx {
      * const key = cx.Bpm.getProcKey("proc123");
      * ```
      */
-    getProcKey(procId: string): string;
-
+    static getProcKey(procId: string): string;
+  
     /**
      * 取所有的流程信息
      * @returns 所有流程信息
@@ -128,8 +128,8 @@ declare namespace cx {
      * const procs = cx.Bpm.getProcsAll();
      * ```
      */
-    getProcsAll(): Array<Object>;
-
+    static getProcsAll(): Array<Object>;
+  
     /**
      * 使用模板启动流程
      * @param tmpl - 模板信息
@@ -145,10 +145,6 @@ declare namespace cx {
      * });
      * ```
      */
-    startWithTmpl(tmpl: Object, variables?: Object): Object;
+    static startWithTmpl(tmpl: Object, variables?: Object): Object;
   }
-
-  const Bpm: BpmInstance;
 }
-
-export = cx; 
