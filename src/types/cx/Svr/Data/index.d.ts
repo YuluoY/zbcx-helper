@@ -29,7 +29,7 @@ declare namespace cx.svr.data {
      *   { name: '测试1', code: 'test1' },
      *   { name: '测试2', code: 'test2' }
      * ]);
-     * console.log('添加的数��ID:', ids);
+     * console.log('添加的数据ID:', ids);
      * ```
      */
     function adds(major: number, minor: number, data: Record<string, any>[]): Promise<number[]>;
@@ -104,8 +104,8 @@ declare namespace cx.svr.data {
      * 检查数据
      * @param {number} major - 实体（主表）主类型
      * @param {number} minor - 实体（主表）子类型
-     * @param {Object} params - 检查参数
-     * @returns {Promise<boolean>} 返回检查结��
+     * @param {Object} params - ��查参数
+     * @returns {Promise<boolean>} 返回检查结果
      * @example
      * ```javascript
      * // 检查数据是否存在

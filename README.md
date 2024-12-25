@@ -1,6 +1,6 @@
 # 智博创享代码补全插件
 
-![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)
 ![VS Code](https://img.shields.io/badge/VS%20Code-1.60+-green.svg)
 ![License](https://img.shields.io/badge/license-Apache--2.0-orange.svg)
 
@@ -158,3 +158,9 @@ npm run package:revert
 
 ### v1.2.0 (2024-12-12)
 - 新增版本回退功能
+
+### v1.2.1 (2024-12-25)
+- 修复cx.svr.data类型声明文件
+
+### v1.2.2 (2024-12-25)
+- 修复类型声明文件中的乱码

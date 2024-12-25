@@ -2,7 +2,7 @@
   "name": "zbcx-helper",
   "displayName": "智博创享助手",
   "description": "智博创享Web产品研发代码补全智能提示插件",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "publisher": "EricHu",
   "author": {
     "name": "Eric Hu",
@@ -30,9 +30,6 @@
   ],
   "main": "dist/extension.js",
   "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/types"
-  ],
   "icon": "images/logo.png",
   "contributes": {
     "languages": [
@@ -65,7 +62,7 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run build",
-    "build": "tsc -p ./ && tsc-alias -p tsconfig.json && node scripts/copyFiles.js",
+    "build": "tsc -p ./ && tsc-alias -p tsconfig.json && node scripts/copy-files.js",
     "watch": "tsc -watch -p ./",
     "package:patch": "node scripts/version-bump.js patch",
     "package:minor": "node scripts/version-bump.js minor",

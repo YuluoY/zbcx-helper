@@ -11,6 +11,16 @@ if (!fs.existsSync(modulesDir)) {
 const srcModulesDir = path.join(__dirname, '../src/modules/cx');
 fs.cpSync(srcModulesDir, modulesDir, { recursive: true });
 
+// 创建 dist/types 目录
+const typesDir = path.join(__dirname, '../dist/types');
+if (!fs.existsSync(typesDir)) {
+    fs.mkdirSync(typesDir, { recursive: true });
+}
+
+// 复制 src/types 到 dist/types
+const srcTypesDir = path.join(__dirname, '../src/types');
+fs.cpSync(srcTypesDir, typesDir, { recursive: true });
+
 // 复制 package.json 到 dist 目录
 const packageJsonPath = path.join(__dirname, '../package.json');
 const distPackageJsonPath = path.join(__dirname, '../dist/package.json');
