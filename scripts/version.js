@@ -15,8 +15,32 @@ function backupFile(filePath) {
 
 // 恢复文件内容
 function restoreFiles() {
+  console.log('正在回退文件修改...');
   for (const [filePath, content] of backups.entries()) {
-    fs.writeFileSync(filePath, content);
+    try {
+      fs.writeFileSync(filePath, content);
+      console.log(`已恢复文件: ${path.basename(filePath)}`);
+    } catch (error) {
+      console.error(`恢复文件失败 ${path.basename(filePath)}:`, error);
+    }
+  }
+}
+
+// 清理临时文件和构建产物
+function cleanupBuildFiles(newVersion) {
+  try {
+    // 删除生成的vsix文件
+    const vsixFile = path.join(__dirname, `../zbcx-helper-${newVersion}.vsix`);
+    if (fs.existsSync(vsixFile)) {
+      fs.unlinkSync(vsixFile);
+      console.log(`已删除文件: zbcx-helper-${newVersion}.vsix`);
+    }
+    
+    // 清理dist目录
+    execSync('npm run clean', { stdio: 'pipe' });
+    console.log('已清理dist目录');
+  } catch (error) {
+    console.error('清理文件失败:', error);
   }
 }
 
@@ -125,14 +149,16 @@ try {
   console.error('执行过程中出错：', error);
   
   // 回退所有文件修改
-  console.log('正在回退文件修改...');
   restoreFiles();
+  
+  // 清理构建产物
+  cleanupBuildFiles(require(path.join(__dirname, '../package.json')).version);
   
   // 尝试回退git操作
   try {
     // 重置工作区和暂存区的更改
     execSync('git reset --hard HEAD', { stdio: 'inherit' });
-    console.log('已回退所有更改');
+    console.log('已回退所有git更改');
   } catch (gitError) {
     console.error('回退git更改时出错：', gitError);
   }
