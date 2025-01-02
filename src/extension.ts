@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { DocumentManager } from './documents';
 import { ComponentHoverProvider } from './language/hover';
 import { CompletionProvider } from './language/completion';
-import { DiagnosticProvider } from './language/diagnostics';
+/* import { DiagnosticProvider } from './language/diagnostics'; */
 
 // 创建全局输出通道
 let outputChannel: vscode.OutputChannel;
@@ -30,15 +30,15 @@ export async function activate(context: vscode.ExtensionContext) {
         outputChannel.appendLine('正在初始化提供者...');
         const hoverProvider = new ComponentHoverProvider();
         const completionProvider = new CompletionProvider();
-        const diagnosticProvider = new DiagnosticProvider();
-        const diagnosticCollection = vscode.languages.createDiagnosticCollection('zbcx-helper');
+        /* const diagnosticProvider = new DiagnosticProvider();
+        const diagnosticCollection = vscode.languages.createDiagnosticCollection('zbcx-helper'); */
 
         // 注册文档到各个提供者
         documents.forEach(doc => {
             const componentName = doc.name.replace(/^cx-/, '');
             hoverProvider.addDoc(componentName, doc);
             completionProvider.addDoc(componentName, doc);
-            diagnosticProvider.addDoc(componentName, doc);
+            /* diagnosticProvider.addDoc(componentName, doc); */
             outputChannel.appendLine(`已加载组件: ${componentName}`);
         });
 
@@ -62,7 +62,7 @@ export async function activate(context: vscode.ExtensionContext) {
                 completionProvider,
                 'c', '<', ':', '@', '#', ' '  // 添加空格作为触发字符
             ),
-            vscode.workspace.onDidChangeTextDocument(event => {
+            /* vscode.workspace.onDidChangeTextDocument(event => {
                 if (event.document.languageId === 'vue') {
                     const diagnostics = diagnosticProvider.provideDiagnostics(event.document);
                     diagnosticCollection.set(event.document.uri, diagnostics);
@@ -73,7 +73,7 @@ export async function activate(context: vscode.ExtensionContext) {
                     const diagnostics = diagnosticProvider.provideDiagnostics(document);
                     diagnosticCollection.set(document.uri, diagnostics);
                 }
-            }),
+            }), */
             zbcxCommand
         );
 
