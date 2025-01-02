@@ -44,7 +44,7 @@
 ## 类型定义
 
 ```ts
-export interface OrgUsrTreeProps {
+interface OrgUsrTreeProps {
   /**
    * UI 规格
    * @default default

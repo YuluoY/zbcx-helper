@@ -14,7 +14,7 @@
 </template>
 
 <script>
-export default {
+default {
   methods: {
     onCurrentChange(data) {
       // 当前选择发生变化
@@ -40,7 +40,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface OrgAuthTreeProps {
+interface OrgAuthTreeProps {
   /**
    * UI 规格
    * @default default
@@ -52,3 +52,4 @@ export interface OrgAuthTreeProps {
    */
   treeAtts?: Record<string, any>;
 } 
+```

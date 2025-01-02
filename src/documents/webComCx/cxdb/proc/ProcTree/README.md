@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default {
+default {
   data() {
     return {
       treeAtts: []
@@ -38,7 +38,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface ProcTreeProps {
+interface ProcTreeProps {
   /**
    * 尺寸
    * @default default
@@ -61,3 +61,4 @@ export interface ProcTreeProps {
    */
   treeAtts: Record<string, any>;
 } 
+```

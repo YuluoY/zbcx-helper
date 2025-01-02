@@ -85,7 +85,7 @@
 
 ```ts
 /** 验证信息 */
-export interface Valid {
+interface Valid {
   /** 最小长度 */
   minlen?: number;
   /** 最大长度 */
@@ -103,7 +103,7 @@ export interface Valid {
 }
 
 /** 字段信息 */
-export interface Fld {
+interface Fld {
   /** 列名 */
   colname: string;
   /** 显示标题 */
@@ -135,12 +135,12 @@ export interface Fld {
 }
 
 /** 分组信息 */
-export interface Grp {
+interface Grp {
   // 文档中未定义分组信息的具体属性
 }
 
 /** 属性表单组件Props */
-export interface FormAttProps {
+interface FormAttProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 分组信息数组 */
@@ -164,3 +164,4 @@ export interface FormAttProps {
   /** 字段值发生变化 */
   onValuesChange?: (fld: Fld, changed: boolean) => void;
 } 
+```

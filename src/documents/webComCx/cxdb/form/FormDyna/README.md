@@ -200,7 +200,7 @@
 
 ```ts
 /** 验证信息 */
-export interface Valid {
+interface Valid {
   /** 最小长度 */
   minlen?: number;
   /** 最大长度 */
@@ -218,7 +218,7 @@ export interface Valid {
 }
 
 /** 分组属性 */
-export interface Grp {
+interface Grp {
   /** 分组命名 */
   name: string;
   /** 分组标题 */
@@ -226,7 +226,7 @@ export interface Grp {
 }
 
 /** 字段信息 */
-export interface Fld {
+interface Fld {
   /** 列名 */
   colname: string;
   /** 显示标题 */
@@ -262,7 +262,7 @@ export interface Fld {
 }
 
 /** 按钮属性 */
-export interface Btn {
+interface Btn {
   /** 命名 */
   name: string;
   /** 标题 */
@@ -278,7 +278,7 @@ export interface Btn {
 }
 
 /** 附件设置 */
-export interface Attach {
+interface Attach {
   /** 存储位置 */
   saveto?: boolean;
   /** 允许上载 */
@@ -296,7 +296,7 @@ export interface Attach {
 }
 
 /** 上载设置 */
-export interface Upload {
+interface Upload {
   /** 支持的文件类型 */
   accept?: string;
   /** 支持多选 */
@@ -308,7 +308,7 @@ export interface Upload {
 }
 
 /** 文件列表配置 */
-export interface Doc {
+interface Doc {
   /** 主类型 */
   major?: number;
   /** 子类型 */
@@ -322,7 +322,7 @@ export interface Doc {
 }
 
 /** 属性设置 */
-export interface Attr {
+interface Attr {
   /** 指定主类型（如果该表单跟某个表关联）（major+minor+id / att 二选一） */
   major?: number;
   /** 指定子类型（如果该表单跟某个表关联）（major+minor+id / att 二选一） */
@@ -356,7 +356,7 @@ export interface Attr {
 }
 
 /** 动态表单组件Props */
-export interface FormDynaProps {
+interface FormDynaProps {
   /** 属性设置 */
   attr?: Attr;
   /** 附件设置 */
@@ -380,3 +380,4 @@ export interface FormDynaProps {
   /** 移除附件 */
   onDocRemove?: (doc: any) => void;
 } 
+```

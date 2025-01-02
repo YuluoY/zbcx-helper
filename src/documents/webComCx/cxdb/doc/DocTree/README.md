@@ -56,7 +56,7 @@
 
 ```ts
 /** 目录授权信息 */
-export interface AuthDir {
+interface AuthDir {
   /** 是否可增加目录 */
   addable?: boolean;
   /** 是否可编辑目录 */
@@ -66,7 +66,7 @@ export interface AuthDir {
 }
 
 /** 文档目录树组件Props */
-export interface DocTreeProps {
+interface DocTreeProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 树结点配置（cx_resdir 配置的 node 名） */
@@ -82,3 +82,4 @@ export interface DocTreeProps {
   /** 传递给 el-tree 的属性 */
   treeAtts?: object;
 } 
+```

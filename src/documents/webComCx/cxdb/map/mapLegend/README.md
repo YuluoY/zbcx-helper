@@ -27,7 +27,7 @@ MapLegend地图图例组件。
 ## 类型定义
 
 ```ts
-export interface MapLegendProps {
+interface MapLegendProps {
   /** 
    * 推送消息名的前缀
    * @default MapLegend
@@ -51,3 +51,4 @@ export interface MapLegendProps {
    */
   legendOption?: Record<string, any>;
 } 
+```

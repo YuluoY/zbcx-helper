@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default {
+default {
   data() {
     return {
       data: [
@@ -53,7 +53,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface ProcCommentData {
+interface ProcCommentData {
   /**
    * 办理详情信息，包含name（名称）、comment（意见）、task（工单环节）
    * @required
@@ -67,7 +67,7 @@ export interface ProcCommentData {
   time: string;
 }
 
-export interface ProcCommentApply {
+interface ProcCommentApply {
   /**
    * 发起人
    * @required
@@ -87,7 +87,7 @@ export interface ProcCommentApply {
   task: string;
 }
 
-export interface ProcCommentProps {
+interface ProcCommentProps {
   /**
    * 尺寸
    * @default default
@@ -106,3 +106,4 @@ export interface ProcCommentProps {
    */
   apply: ProcCommentApply;
 } 
+```

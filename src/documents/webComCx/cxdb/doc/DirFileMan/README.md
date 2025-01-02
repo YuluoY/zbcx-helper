@@ -69,7 +69,7 @@
 
 ```ts
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -83,7 +83,7 @@ export interface AuthFile {
 }
 
 /** 目录下的文件管理组件Props */
-export interface DirFileManProps {
+interface DirFileManProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 目录名 */
@@ -105,3 +105,4 @@ export interface DirFileManProps {
   /** 文件卡片组件 */
   fileCardCom?: string;
 } 
+```

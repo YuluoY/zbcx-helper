@@ -62,7 +62,7 @@ export default {
 
 ```ts
 /** 文档列表组件Props */
-export interface DocListWsProps {
+interface DocListWsProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 是否可以浏览 */

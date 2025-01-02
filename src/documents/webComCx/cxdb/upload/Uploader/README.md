@@ -18,7 +18,7 @@
 </template>
 
 <script>
-export default {
+default {
   methods: {
     handleUpload(ret) {
       console.log('upload success:', ret)
@@ -59,7 +59,7 @@ export default {
 
 ```ts
 /** 上传数据配置 */
-export interface UploaderData {
+interface UploaderData {
   /**
    * 实体主类型
    * @required
@@ -100,7 +100,7 @@ export interface UploaderData {
   dir?: string;
 }
 
-export interface UploaderProps {
+interface UploaderProps {
   /**
    * 尺寸
    * @default default
@@ -157,3 +157,4 @@ export interface UploaderProps {
    */
   data: UploaderData;
 } 
+```

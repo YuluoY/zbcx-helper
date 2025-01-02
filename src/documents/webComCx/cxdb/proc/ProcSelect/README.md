@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default {
+default {
   methods: {
     onChange(value) {
       console.log('value数据项:', value);
@@ -36,7 +36,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface ProcSelectProps {
+interface ProcSelectProps {
   /**
    * 尺寸
    * @default default
@@ -49,3 +49,4 @@ export interface ProcSelectProps {
    */
   value: string;
 } 
+```

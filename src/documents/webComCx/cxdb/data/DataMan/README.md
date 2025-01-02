@@ -265,4 +265,4 @@ interface DataManProps {
   /** 传递给组件的参数 */
   params: DataManParams;
 }
-</code_block_to_apply_changes_from> 
+```

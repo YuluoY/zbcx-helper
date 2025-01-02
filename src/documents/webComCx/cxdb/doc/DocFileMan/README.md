@@ -84,7 +84,7 @@
 
 ```ts
 /** 查询条件配置 */
-export interface QueryCfg {
+interface QueryCfg {
   /** 条件表达式参数 */
   args: any[];
   /** 排序信息 */
@@ -92,7 +92,7 @@ export interface QueryCfg {
 }
 
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -106,7 +106,7 @@ export interface AuthFile {
 }
 
 /** 文档文件管理组件Props */
-export interface DocFileManProps {
+interface DocFileManProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 查询条件(cx.svr.data.query() 查询条件) */
@@ -134,3 +134,4 @@ export interface DocFileManProps {
   /** 文档回收站卡片组件 */
   docrecybCardCom?: string | object;
 } 
+```

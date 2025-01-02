@@ -44,7 +44,7 @@ export default {
 
 ```ts
 /** 文档回收站卡片组件Props */
-export interface DocrecybCardProps {
+interface DocrecybCardProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** cx_docrecyb */
@@ -58,3 +58,4 @@ export interface DocrecybCardProps {
   /** 信息区样式 */
   info?: object;
 } 
+```

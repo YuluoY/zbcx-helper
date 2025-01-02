@@ -66,7 +66,7 @@
 
 ```ts
 /** 文件管理组件Props */
-export interface FileManProps {
+interface FileManProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 树组件 */
@@ -96,3 +96,4 @@ export interface FileManProps {
   /** 文档卡片组件 */
   fileCardCom?: string | Record<string, any>;
 } 
+```

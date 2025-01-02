@@ -45,7 +45,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface OrgUsrAuthTreeProps {
+interface OrgUsrAuthTreeProps {
   /**
    * UI 规格
    * @default default
@@ -57,3 +57,4 @@ export interface OrgUsrAuthTreeProps {
    */
   treeAtts?: Record<string, any>;
 } 
+```

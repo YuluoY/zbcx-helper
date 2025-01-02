@@ -18,7 +18,7 @@
 </template>
 
 <script>
-export default {
+default {
   data() {
     return {
     }
@@ -56,7 +56,7 @@ export default {
 
 ```ts
 /** 授权信息 */
-export interface AuthDir {
+interface AuthDir {
   /**
    * 是否可增加目录
    * @default true
@@ -76,7 +76,7 @@ export interface AuthDir {
   removable?: boolean;
 }
 
-export interface ResTreeProps {
+interface ResTreeProps {
   /**
    * 尺寸
    * @default default
@@ -118,4 +118,4 @@ export interface ResTreeProps {
    */
   treeAtts?: Record<string, any>;
 }
-</ts> 
+```

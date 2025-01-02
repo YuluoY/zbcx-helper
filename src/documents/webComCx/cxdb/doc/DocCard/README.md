@@ -78,7 +78,7 @@ export default {
 
 ```ts
 /** 操作项配置 */
-export interface OperCfg {
+interface OperCfg {
   /** 是否显示标题 */
   showTitle?: boolean;
   /** 是否显示图标 */
@@ -88,7 +88,7 @@ export interface OperCfg {
 }
 
 /** 操作项 */
-export interface OperItem {
+interface OperItem {
   /** 标题 */
   title: string;
   /** 是否显示 */
@@ -102,7 +102,7 @@ export interface OperItem {
 }
 
 /** 文档卡片组件Props */
-export interface DocCardProps {
+interface DocCardProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 文件信息（cx_media） */
@@ -126,3 +126,4 @@ export interface DocCardProps {
   /** 信息区样式 */
   info?: object;
 } 
+```

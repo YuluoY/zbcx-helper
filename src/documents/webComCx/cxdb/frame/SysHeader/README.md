@@ -60,7 +60,7 @@
 ## 类型定义
 
 ```ts
-export interface SysHeaderProps {
+interface SysHeaderProps {
   /** 头部系统logo路径 */
   sysLogo?: string;
 
@@ -71,3 +71,4 @@ export interface SysHeaderProps {
     [key: string]: any;
   };
 } 
+```

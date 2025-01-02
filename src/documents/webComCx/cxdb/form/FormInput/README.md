@@ -66,7 +66,7 @@ export default {
 
 ```ts
 /** 方式一参数 */
-export interface FormInputParamsOne {
+interface FormInputParamsOne {
   /** 表单配置命名 */
   formKey: string;
   /** 运行插件的参数（参见函数: runFormPlug） */
@@ -77,7 +77,7 @@ export interface FormInputParamsOne {
 }
 
 /** 方式二参数 */
-export interface FormInputParamsTwo {
+interface FormInputParamsTwo {
   /** 运行插件的参数（参见函数: runFormPlug） */
   params: {
     /** 默认属性设置,会合并到attr.att中 */
@@ -90,7 +90,7 @@ export interface FormInputParamsTwo {
 }
 
 /** 公共参数 */
-export interface CommonParams {
+interface CommonParams {
   /** 是否需要关联附件功能（具体附件和上传参数配置attach和upload） */
   useAttach?: boolean;
   /** 参照 cx-form-dyna */
@@ -106,4 +106,5 @@ export interface CommonParams {
 }
 
 /** 录入表单组件Props */
-export type FormInputProps = (FormInputParamsOne | FormInputParamsTwo) & CommonParams; 
+type FormInputProps = (FormInputParamsOne | FormInputParamsTwo) & CommonParams; 
+```

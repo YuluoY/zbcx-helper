@@ -56,3 +56,4 @@ export interface DirTreeProps {
   /** 传递给 el-tree 的属性 */
   treeAtts?: Record<string, any>;
 } 
+```

@@ -78,7 +78,7 @@
 
 ```ts
 /** 操作项配置 */
-export interface OperCfg {
+interface OperCfg {
   /** 是否显示标题 */
   showTitle?: boolean;
   /** 是否显示图标 */
@@ -88,7 +88,7 @@ export interface OperCfg {
 }
 
 /** 文件卡片组件Props */
-export interface FileCardProps {
+interface FileCardProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 文件信息（文件系统） */
@@ -118,3 +118,4 @@ export interface FileCardProps {
   /** 点击复选框 */
   onCheckChange?: (args: any, checked: boolean) => void;
 } 
+```

@@ -59,7 +59,7 @@
 ## 类型定义
 
 ```ts
-export interface OrgUsrStrictTreeParams {
+interface OrgUsrStrictTreeParams {
   /**
    * 是否展示禁用用户
    * @default false
@@ -115,7 +115,7 @@ export interface OrgUsrStrictTreeParams {
   showMyAdd?: number;
 }
 
-export interface OrgUsrStrictTreeProps {
+interface OrgUsrStrictTreeProps {
   /**
    * UI 规格
    * @default default

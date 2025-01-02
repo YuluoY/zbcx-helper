@@ -61,7 +61,7 @@
 
 ```ts
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -75,7 +75,7 @@ export interface AuthFile {
 }
 
 /** 文件卡片列表组件Props */
-export interface FileListCardProps {
+interface FileListCardProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 文件信息列表（文件系统） */
@@ -97,3 +97,4 @@ export interface FileListCardProps {
   /** 删除某行（UI层删除） */
   onRowRemove?: (selected: any) => void;
 } 
+```

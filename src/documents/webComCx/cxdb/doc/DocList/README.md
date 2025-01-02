@@ -63,7 +63,7 @@ export default {
 
 ```ts
 /** 目录配置 */
-export interface DirConfig {
+interface DirConfig {
   /** 目录名 */
   name: string;
   /** 面包屑的 to */
@@ -71,7 +71,7 @@ export interface DirConfig {
 }
 
 /** 文档列表组件Props */
-export interface DocListProps {
+interface DocListProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 是否可以浏览 */
@@ -103,3 +103,4 @@ export interface DocListProps {
   /** 字段映射, 将分组字段的值映射为需要显示的名称 如`{ mpg: '图片', vedio: '视频', yx: '音频' }` */
   grpFldValues?: Record<string, string>;
 } 
+```

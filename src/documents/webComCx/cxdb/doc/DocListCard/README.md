@@ -69,7 +69,7 @@ export default {
 
 ```ts
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -83,7 +83,7 @@ export interface AuthFile {
 }
 
 /** 文档列表卡片组件Props */
-export interface DocListCardProps {
+interface DocListCardProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 文件信息列表（cx_media） */
@@ -99,4 +99,4 @@ export interface DocListCardProps {
   /** 文档卡片组件名 */
   cardCom?: string;
 }
-</code_block_to_apply_changes_from> 
+```

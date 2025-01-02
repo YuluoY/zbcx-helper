@@ -64,7 +64,7 @@ export default {
 
 ```ts
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -78,7 +78,7 @@ export interface AuthFile {
 }
 
 /** 文档列表管理组件Props */
-export interface DocListTableProps {
+interface DocListTableProps {
   /** 文件列表(cx_media 表) */
   files: any[];
   /** 授权信息 */
@@ -88,4 +88,4 @@ export interface DocListTableProps {
   /** 表格配置名(cx_tabcfg 的 name) */
   tableCfg?: string;
 }
-</code_block_to_apply_changes_from> 
+```

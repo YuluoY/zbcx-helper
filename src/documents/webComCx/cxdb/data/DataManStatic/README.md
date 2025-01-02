@@ -116,3 +116,4 @@ interface DataManStaticProps {
   /** cx-tabs组件可接收的事件监听对象 */
   listeners?: Record<string, Function>;
 } 
+```

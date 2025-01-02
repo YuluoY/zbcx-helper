@@ -69,7 +69,7 @@ export default {
 
 ```ts
 /** 上传数据配置 */
-export interface UploaderWsData {
+interface UploaderWsData {
   /**
    * 实体主类型
    * @required
@@ -110,7 +110,7 @@ export interface UploaderWsData {
   dir?: string;
 }
 
-export interface UploaderWsProps {
+interface UploaderWsProps {
   /**
    * 尺寸
    * @default default
@@ -167,3 +167,4 @@ export interface UploaderWsProps {
    */
   data: UploaderWsData;
 } 
+```

@@ -34,7 +34,7 @@ export default {
       const temp = this.param
       this.param = null
       temp.type = temp.type === 'card' ? 'border-card' : 'card'
-      temp.tabs = this.getMenus(\`size:default, type: \${temp.type}\`).map(tab => ({ ...tab, closable: true }))
+      temp.tabs = this.getMenus(\`size:default, type: \\${temp.type}\\`).map(tab => ({ ...tab, closable: true }))
       this.param = temp
     },
     onSelect(data) {

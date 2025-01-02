@@ -77,7 +77,7 @@
 
 ```ts
 /** 目录授权信息 */
-export interface AuthDir {
+interface AuthDir {
   /** 是否可增加目录 */
   addable?: boolean;
   /** 是否可编辑目录 */
@@ -87,7 +87,7 @@ export interface AuthDir {
 }
 
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -101,7 +101,7 @@ export interface AuthFile {
 }
 
 /** 目录参数配置 */
-export interface DirParams {
+interface DirParams {
   /** 根目录名 */
   rootLabel: string;
   /** 目录权限信息 */
@@ -111,7 +111,7 @@ export interface DirParams {
 }
 
 /** 目录配置 */
-export interface DirCfg {
+interface DirCfg {
   /** 目录（详见cx.svr.file 对目录） */
   dir: string;
   /** 参数 */
@@ -119,7 +119,7 @@ export interface DirCfg {
 }
 
 /** 多目录文件树组件Props */
-export interface DirsTreeProps {
+interface DirsTreeProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 目录数组 */
@@ -137,3 +137,4 @@ export interface DirsTreeProps {
   /** 传递给 el-tree 的属性 */
   treeAtts?: object;
 } 
+```

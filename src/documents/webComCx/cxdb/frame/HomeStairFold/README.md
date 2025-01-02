@@ -60,7 +60,7 @@
 ## 类型定义
 
 ```ts
-export interface HomeStairFoldProps {
+interface HomeStairFoldProps {
   /** 头部系统logo路径 */
   sysLogo?: string;
   /** 头部的样式 */
@@ -78,3 +78,4 @@ export interface HomeStairFoldProps {
   /** menufold组件的参数对象 */
   attMenuFold?: Record<string, any>;
 } 
+```

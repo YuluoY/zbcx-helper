@@ -59,7 +59,7 @@
 
 ```ts
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -73,7 +73,7 @@ export interface AuthFile {
 }
 
 /** 文件数据表组件Props */
-export interface FileListTableProps {
+interface FileListTableProps {
   /** 文件列表（文件系统） */
   files: any[];
   /** 配置插件名（cx_cmdtool 的 node）,多个用逗号分隔 */
@@ -93,3 +93,4 @@ export interface FileListTableProps {
   /** 删除某行（UI层删除） */
   onRowRemove?: (selected: any) => void;
 } 
+```

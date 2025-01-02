@@ -93,7 +93,7 @@
 
 ```ts
 /** 目录授权信息 */
-export interface AuthDir {
+interface AuthDir {
   /** 是否可增加目录 */
   addable?: boolean;
   /** 是否可编辑目录 */
@@ -103,7 +103,7 @@ export interface AuthDir {
 }
 
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -117,7 +117,7 @@ export interface AuthFile {
 }
 
 /** 文档管理组件Props */
-export interface DocManProps {
+interface DocManProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 树组件 */
@@ -159,3 +159,4 @@ export interface DocManProps {
   /** 文件授权信息 */
   authFile?: AuthFile;
 } 
+```

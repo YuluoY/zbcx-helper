@@ -56,7 +56,7 @@
 ## 类型定义
 
 ```ts
-export interface HomeStairPanelProps {
+interface HomeStairPanelProps {
   /** 头部系统logo路径 */
   sysLogo?: string;
   /** 头部的样式 */
@@ -70,3 +70,4 @@ export interface HomeStairPanelProps {
   /** 最多在运行状态插件数,超出按队列销毁 */
   maxRunNum?: number;
 } 
+```

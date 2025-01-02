@@ -10,7 +10,7 @@
 </template>
 
 <script>
-export default {
+default {
   data() {
     return {
       highLevel: true,
@@ -43,7 +43,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface PswUpdProps {
+interface PswUpdProps {
   /**
    * 尺寸
    * @default default
@@ -73,3 +73,4 @@ export interface PswUpdProps {
    */
   encode: (password: string) => string;
 } 
+```

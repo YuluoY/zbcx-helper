@@ -66,7 +66,7 @@ export default {
 
 ```ts
 /** 文件授权信息 */
-export interface AuthFile {
+interface AuthFile {
   /** 是否可下载文档 */
   downloadable?: boolean;
   /** 是否可上载文档 */
@@ -80,7 +80,7 @@ export interface AuthFile {
 }
 
 /** 文档附件组件参数 */
-export interface DocAttachParams {
+interface DocAttachParams {
   /** 实体主类型 */
   major: number;
   /** 实体子类型 */
@@ -112,9 +112,10 @@ export interface DocAttachParams {
 }
 
 /** 文档附件组件Props */
-export interface DocAttachProps {
+interface DocAttachProps {
   /** 尺寸 */
   size?: 'large' | 'default' | 'small';
   /** 传递给组件的参数 */
   params: DocAttachParams;
 } 
+```

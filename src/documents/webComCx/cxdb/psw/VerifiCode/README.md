@@ -15,7 +15,7 @@
 </template>
 
 <script>
-export default {
+default {
   methods: {
     onVaild(param) {
       console.log('onVaild =>', param)
@@ -41,7 +41,7 @@ export default {
 ## 类型定义
 
 ```ts
-export interface VerifiCodeProps {
+interface VerifiCodeProps {
   /**
    * 尺寸
    * @default default
@@ -53,3 +53,4 @@ export interface VerifiCodeProps {
    */
   currentCaptchaConfig?: string;
 } 
+```
