@@ -9,7 +9,7 @@ let outputChannel: vscode.OutputChannel;
 
 function getOutputChannel(): vscode.OutputChannel {
   if (!outputChannel) {
-    outputChannel = vscode.window.createOutputChannel('ATT Hover Debug');
+    outputChannel = vscode.window.createOutputChannel('zbcx-helper Hover Debug');
   }
   return outputChannel;
 }

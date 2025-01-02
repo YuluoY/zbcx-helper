@@ -81,7 +81,7 @@ export async function activate(context: vscode.ExtensionContext) {
         console.log('组件助手扩展激活成功');
         
         // 显示通知
-        vscode.window.showInformationMessage(`智博创享助手v${version}已激活`);
+        // vscode.window.showInformationMessage(`智博创享助手v${version}已激活`);
     } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         outputChannel.appendLine(`组件助手激活失败: ${message}`);

@@ -8,7 +8,7 @@ let outputChannel: vscode.OutputChannel;
 
 function getOutputChannel(): vscode.OutputChannel {
   if (!outputChannel) {
-    outputChannel = vscode.window.createOutputChannel('ATT Document Debug');
+    outputChannel = vscode.window.createOutputChannel('zbcx-helper Document Debug');
   }
   return outputChannel;
 }
@@ -37,7 +37,7 @@ export class AttDocument implements ComponentDoc {
     // 尝试读取文档文件
     try {
       // 从插件目录中查找文档
-      const extensionPath = vscode.extensions.getExtension('undefined_publisher.att-component-helper')?.extensionPath;
+      const extensionPath = vscode.extensions.getExtension('EricHu.zbcx-helper')?.extensionPath;
       if (!extensionPath) {
         channel.appendLine('未找到插件路径');
         return;
