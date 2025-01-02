@@ -1,8 +1,8 @@
 {
   "name": "zbcx-helper",
   "displayName": "智博创享助手",
-  "description": "智博创享Web产品研发代码补全智能提示插件",
-  "version": "1.2.3",
+  "description": "智博创享Web产品研发组件代码补全智能提示插件",
+  "version": "1.0.0",
   "publisher": "EricHu",
   "author": {
     "name": "Eric Hu",
@@ -19,12 +19,9 @@
   "keywords": [
     "智博创享",
     "代码补全",
-    "智能提示",
-    "Vue",
-    "JavaScript"
+    "Vue"
   ],
   "activationEvents": [
-    "onLanguage:javascript",
     "onLanguage:vue",
     "onCommand:zbcx-helper.zbcx"
   ],
@@ -33,15 +30,6 @@
   "icon": "images/logo.png",
   "contributes": {
     "languages": [
-      {
-        "id": "javascript",
-        "extensions": [
-          ".js"
-        ],
-        "aliases": [
-          "JavaScript"
-        ]
-      },
       {
         "id": "vue",
         "extensions": [
@@ -61,30 +49,40 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run build",
-    "build": "tsc -p ./ && tsc-alias -p tsconfig.json && node scripts/copy-files.js",
-    "watch": "tsc -watch -p ./",
-    "package:patch": "node scripts/version-bump.js patch",
-    "package:minor": "node scripts/version-bump.js minor",
-    "package:major": "node scripts/version-bump.js major",
-    "package:revert": "node scripts/version-bump.js revert",
-    "publish:patch": "node scripts/version-bump.js patch && vsce package",
-    "publish:minor": "node scripts/version-bump.js minor && vsce package",
-    "publish:major": "node scripts/version-bump.js major && vsce package",
+    "clean": "rimraf dist",
+    "build": "rimraf dist && webpack --config ./webpack.config.js",
+    "build:dev": "rimraf dist && webpack --config ./webpack.config.js --mode development",
+    "release:major": "node scripts/version.js major",
+    "release:minor": "node scripts/version.js minor",
+    "release:patch": "node scripts/version.js patch",
+    "release": "npm run release:patch",
     "login": "vsce login EricHu"
   },
   "devDependencies": {
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "@types/mocha": "^10.0.6",
+    "@types/lodash": "^4.17.13",
     "@types/node": "^16.18.34",
     "@types/vscode": "^1.73.0",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "@vscode/vsce": "^2.24.0",
+    "concurrently": "^8.2.2",
     "cross-var": "^1.1.0",
     "eslint": "^8.54.0",
+    "rimraf": "^5.0.5",
     "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.2",
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "lodash": "^4.17.21",
+    "marked": "^11.1.0",
+    "vue": "^3.5.13",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "ts-loader": "^9.5.1",
+    "copy-webpack-plugin": "^11.0.0"
   },
   "repository": {
     "type": "git",

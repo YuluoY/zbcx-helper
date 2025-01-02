@@ -1,414 +1,107 @@
-/**
- * 智博创享代码补全插件的主入口文件
- * @module extension
- */
-
 import * as vscode from 'vscode';
-import { ConfigItem, FunctionConfigItem, ModuleConfigItem, BaseConfigItem } from './types';
-import { indexConfig } from './modules/cx/index';
-import * as path from 'path';
-import * as fs from 'fs';
-import { getModulesByLanguage, getModuleByTrigger } from './moduleConfigs';
-import { getComponentCompletionItems, getComponentDocumentation } from './modules/cxcoms';
-import pkg from '../package.json';
+import { DocumentManager } from './documents';
+import { ComponentHoverProvider } from './language/hover';
+import { CompletionProvider } from './language/completion';
+import { DiagnosticProvider } from './language/diagnostics';
 
-let cxData: ModuleConfigItem = indexConfig;
+// 创建全局输出通道
+let outputChannel: vscode.OutputChannel;
 
-function loadConfig(configPath: string): ConfigItem | undefined {
-	try {
-		// 尝试加载配置文件
-		let fullPath = path.join(__dirname, 'modules', configPath);
-		let normalizedPath = path.normalize(fullPath);
-		
-		// 尝试加载 .js 文件 (编译后的文件)
-		if (!path.extname(normalizedPath)) {
-			normalizedPath += '.js';
-		}
+export async function activate(context: vscode.ExtensionContext) {
+    // 初始化输出通道
+    outputChannel = vscode.window.createOutputChannel('智博创享助手');
+    context.subscriptions.push(outputChannel); // 确保通道被正确释放
+    outputChannel.show();
+    outputChannel.appendLine('正在激活组件助手扩展...');
+    console.log('正在激活组件助手扩展...');
 
-		console.log('Loading config from:', normalizedPath);
-		const config = require(normalizedPath);
-		
-		if (!config) {
-			console.log('Config is empty');
-			return undefined;
-		}
+    try {
+        // 创建文档管理器
+        outputChannel.appendLine('正在初始化文档管理器...');
+        const documentManager = new DocumentManager(context.extensionUri);
+        const documents = documentManager.getDocuments();
+        outputChannel.appendLine(`已加载 ${documents.length} 个组件文档`);
 
-		// 查找以 Config 结���导出
-		const configKey = Object.keys(config).find(key => key.endsWith('Config'));
-		if (!configKey) {
-			console.log('No config export found in:', configPath);
-			console.log('Available exports:', Object.keys(config));
-			return undefined;
-		}
-		console.log('Config key:', configKey);
-		console.log('Config content:', JSON.stringify(config[configKey], null, 2));
-		return config[configKey];
-	} catch (error) {
-		console.error('加载配置文件失败:', configPath);
-		console.error('错误详情:', error);
-		return undefined;
-	}
+        // 创建提供者实例
+        outputChannel.appendLine('正在初始化提供者...');
+        const hoverProvider = new ComponentHoverProvider();
+        const completionProvider = new CompletionProvider();
+        const diagnosticProvider = new DiagnosticProvider();
+        const diagnosticCollection = vscode.languages.createDiagnosticCollection('zbcx-helper');
+
+        // 注册文档到各个提供者
+        documents.forEach(doc => {
+            const componentName = doc.name.replace(/^cx-/, '');
+            hoverProvider.addDoc(componentName, doc);
+            completionProvider.addDoc(componentName, doc);
+            diagnosticProvider.addDoc(componentName, doc);
+            outputChannel.appendLine(`已加载组件: ${componentName}`);
+        });
+
+        // 注册 zbcx 命令
+        outputChannel.appendLine('正在注册 zbcx 命令...');
+        let zbcxCommand = vscode.commands.registerCommand('zbcx-helper.zbcx', () => {
+            outputChannel.appendLine('执行 zbcx 命令');
+            const editor = vscode.window.activeTextEditor;
+            if (editor) {
+                const position = editor.selection.active;
+                editor.edit(editBuilder => {
+                    // 删除已输入的 zbcx
+                    const range = new vscode.Range(
+                        new vscode.Position(position.line, position.character - 4),
+                        position
+                    );
+                    editBuilder.delete(range);
+                    // 插入 <cx-
+                    editBuilder.insert(new vscode.Position(position.line, position.character - 4), '<cx-');
+                });
+            }
+        });
+
+        // 注册提供者
+        outputChannel.appendLine('正在注册语言提供者...');
+        context.subscriptions.push(
+            vscode.languages.registerHoverProvider(
+                { scheme: 'file', language: 'vue' },
+                hoverProvider
+            ),
+            vscode.languages.registerCompletionItemProvider(
+                { scheme: 'file', language: 'vue' },
+                completionProvider,
+                'c', '<', ':', '@', '#', ' '  // 添加空格作为触发字符
+            ),
+            vscode.workspace.onDidChangeTextDocument(event => {
+                if (event.document.languageId === 'vue') {
+                    const diagnostics = diagnosticProvider.provideDiagnostics(event.document);
+                    diagnosticCollection.set(event.document.uri, diagnostics);
+                }
+            }),
+            vscode.workspace.onDidOpenTextDocument(document => {
+                if (document.languageId === 'vue') {
+                    const diagnostics = diagnosticProvider.provideDiagnostics(document);
+                    diagnosticCollection.set(document.uri, diagnostics);
+                }
+            }),
+            zbcxCommand
+        );
+
+        outputChannel.appendLine('组件助手扩展激活成功');
+        console.log('组件助手扩展激活成功');
+        
+        // 显示通知
+        vscode.window.showInformationMessage('智博创享助手已激活');
+    } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        outputChannel.appendLine(`组件助手激活失败: ${message}`);
+        console.error(`组件助手激活失败: ${message}`);
+        vscode.window.showErrorMessage(`组件助手激活失败: ${message}`);
+    }
 }
 
-function resolveConfig(currentData: ConfigItem, parts: string[]): ConfigItem | undefined {
-	console.log('Resolving config for parts:', parts);
-	console.log('Current data:', JSON.stringify(currentData, null, 2));
-	
-	let result = currentData;
-	
-	for (let i = 0; i < parts.length; i++) {
-		const part = parts[i].trim();
-		console.log('Processing part:', part);
-		
-		if ('children' in result && result.children[part]) {
-			const child = result.children[part];
-			console.log('Found child:', child);
-			
-			if (typeof child === 'string') {
-				console.log('String child is not supported anymore');
-				return undefined;
-			} else {
-				result = child;
-				console.log('Using config:', JSON.stringify(child, null, 2));
-			}
-		} else {
-			console.log('Module not found:', part);
-			if ('children' in result) {
-				console.log('Available children:', Object.keys(result.children));
-			}
-			return undefined;
-		}
-	}
-	return result;
+export function deactivate() {
+    if (outputChannel) {
+        outputChannel.appendLine('组件助手扩展已停用');
+        outputChannel.dispose();
+    }
+    console.log('组件助手扩展已停用');
 }
-
-// 注册 cx 触发的代码补全
-const cxTriggerProvider = vscode.languages.registerCompletionItemProvider(
-	[
-		{ scheme: 'file', language: 'javascript' },
-		{ scheme: 'file', language: 'vue' }
-	],
-	{
-		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-			const linePrefix = document.lineAt(position).text.slice(0, position.character);
-			
-			// 当输入 'c' 时触发
-			if (linePrefix.endsWith('c')) {
-				const cxItem = new vscode.CompletionItem('cx');
-				cxItem.kind = vscode.CompletionItemKind.Module;
-				cxItem.detail = '智博创享基础模块';
-				cxItem.sortText = '0'; // 添加最高优先级
-				cxItem.preselect = true; // 设置为预选项
-				return [cxItem];
-			}
-			return undefined;
-		}
-	},
-	'c' // 触发字符
-);
-
-// 注册 cx. 后的代码补全
-const provider = vscode.languages.registerCompletionItemProvider(
-	[
-		{ scheme: 'file', language: 'javascript' },
-		{ scheme: 'file', language: 'vue' }
-	],
-	{
-		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-			const linePrefix = document.lineAt(position).text.slice(0, position.character);
-			
-			// 检查是否在输入 cx.
-			if (!linePrefix.endsWith('cx.')) {
-				return undefined;
-			}
-
-			console.log('提供cx.补全');
-			return getCompletionItems(cxData);
-		}
-	},
-	'.' // 触发字符
-);
-
-// 注册子模块代码补全
-const subModuleProvider = vscode.languages.registerCompletionItemProvider(
-	[
-		{ scheme: 'file', language: 'javascript' },
-		{ scheme: 'file', language: 'vue' }
-	],
-	{
-		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-			const linePrefix = document.lineAt(position).text.slice(0, position.character);
-			
-			// 检查是否在输入子模块
-			if (!linePrefix.includes('cx.')) {
-				return undefined;
-			}
-
-			const parts = linePrefix.split('cx.')[1].split('.');
-			if (parts.length < 2) {
-				return undefined;
-			}
-
-			console.log('提供子模块补全, parts:', parts);
-			const currentData = resolveConfig(cxData, parts.slice(0, -1));
-			if (!currentData) {
-				return undefined;
-			}
-
-			if ('children' in currentData) {
-				const items = getCompletionItems(currentData);
-				console.log('生成的补全项:', items.map(item => ({
-					label: item.label,
-					kind: item.kind,
-					detail: item.detail
-				})));
-				return items;
-			}
-			return undefined;
-		}
-	},
-	'.' // 触发字符
-);
-
-// 注册悬停提示
-const hoverProvider = vscode.languages.registerHoverProvider(
-	[
-		{ scheme: 'file', language: 'javascript' },
-		{ scheme: 'file', language: 'vue' }
-	],
-	{
-		provideHover(document: vscode.TextDocument, position: vscode.Position) {
-			const wordRange = document.getWordRangeAtPosition(position);
-			if (!wordRange) {
-				return undefined;
-			}
-
-			const word = document.getText(wordRange);
-			const line = document.lineAt(position).text;
-
-			// 检查是否在 cx 上下文中
-			if (!line.includes('cx.')) {
-				return undefined;
-			}
-
-			const parts = line.split('cx.')[1].split('.');
-			const targetWord = parts[parts.length - 1].split('(')[0].trim();
-			
-			if (word !== targetWord) {
-				return undefined;
-			}
-
-			console.log('提供悬停提示, word:', word, 'parts:', parts);
-			const currentData = resolveConfig(cxData, parts.slice(0, -1));
-			if (!currentData) {
-				return undefined;
-			}
-
-			if ('children' in currentData && currentData.children[targetWord]) {
-				const item = currentData.children[targetWord];
-				if (typeof item === 'string') {
-					const configPath = path.join('modules/cx', item);
-					console.log('加载悬停项配置:', configPath);
-					const config = loadConfig(configPath);
-					if (!config) {
-						console.log('加载悬停项配置失败');
-						return undefined;
-					}
-					console.log('加载的悬停项配置:', JSON.stringify(config, null, 2));
-					return createHover(config);
-				}
-				console.log('使用内联悬停项配置:', JSON.stringify(item, null, 2));
-				return createHover(item);
-			}
-
-			return undefined;
-		}
-	}
-);
-
-// 注册 HTML/Vue 标签补全
-const tagCompletionProvider = vscode.languages.registerCompletionItemProvider(
-	[
-		{ scheme: 'file', language: 'html' },
-		{ scheme: 'file', language: 'vue' }
-	],
-	{
-		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-			const linePrefix = document.lineAt(position).text.slice(0, position.character);
-			const language = document.languageId;
-			
-			// 检查是否在 template 标签内
-			if (language === 'vue') {
-				const text = document.getText();
-				const offset = document.offsetAt(position);
-				const beforeText = text.substring(0, offset);
-				
-				// 更精确地检查是否在 template 标签内
-				const templateTags = beforeText.match(/<template.*?>/g);
-				const closingTemplateTags = beforeText.match(/<\/template>/g);
-				
-				if (!templateTags || (closingTemplateTags && templateTags.length <= closingTemplateTags.length)) {
-					return undefined;
-				}
-			}
-			
-			// 检查当前语言是否支持组件模块
-			const supportedModules = getModulesByLanguage(language);
-			const cxcomsModule = supportedModules.find(m => m.name === 'cxcoms');
-			if (!cxcomsModule) {
-				return undefined;
-			}
-			
-			// 检查是否匹配触发字符
-			const currentLine = linePrefix.trim();
-			if (!currentLine.endsWith('<') && !currentLine.includes('cx-') && !currentLine.includes('<cx')) {
-				return undefined;
-			}
-
-			// 获取所有组件的补全项
-			const componentItems = getComponentCompletionItems().map(item => {
-				const completionItem = new vscode.CompletionItem(item.label);
-				completionItem.kind = vscode.CompletionItemKind.Snippet;
-				completionItem.detail = item.detail;
-				completionItem.documentation = new vscode.MarkdownString(item.documentation);
-				completionItem.insertText = new vscode.SnippetString(item.insertText);
-				completionItem.preselect = true;
-				completionItem.sortText = 'a';  // 确保排在前面
-				return completionItem;
-			});
-			
-			return componentItems;
-		}
-	},
-	'<', 'c', 'x', '-'  // 触发字符
-);
-
-// 注册组件标签悬浮提示
-const tagHoverProvider = vscode.languages.registerHoverProvider(
-	[
-		{ scheme: 'file', language: 'html' },
-		{ scheme: 'file', language: 'vue' }
-	],
-	{
-		provideHover(document: vscode.TextDocument, position: vscode.Position) {
-			const wordRange = document.getWordRangeAtPosition(position, /cx-[a-zA-Z-]+/);
-			if (!wordRange) {
-				return undefined;
-			}
-
-			const word = document.getText(wordRange);
-			const documentation = getComponentDocumentation(word);
-			if (documentation) {
-				const markdown = new vscode.MarkdownString();
-				markdown.appendMarkdown(documentation);
-				return new vscode.Hover(markdown);
-			}
-
-			return undefined;
-		}
-	}
-);
-
-function getCompletionItems(data: ConfigItem): vscode.CompletionItem[] {
-	const items: vscode.CompletionItem[] = [];
-
-	if ('children' in data) {
-		for (const [key, value] of Object.entries(data.children)) {
-			const item = new vscode.CompletionItem(key);
-
-			if (typeof value === 'string') {
-				console.log('String child is not supported anymore');
-				continue;
-			} else if (typeof value === 'object' && value !== null) {
-				item.kind = getCompletionItemKind(value.kind);
-				item.detail = value.detail;
-				if ('documentation' in value && typeof value.documentation === 'object') {
-					item.documentation = createMarkdownString(value);
-				}
-				
-				item.sortText = '0';
-				item.preselect = true;
-			}
-			
-			items.push(item);
-		}
-	}
-
-	return items;
-}
-
-function createMarkdownString(item: ConfigItem): vscode.MarkdownString {
-	const markdown = new vscode.MarkdownString();
-	
-	if ('documentation' in item && item.documentation) {
-		if (typeof item.documentation === 'string') {
-			markdown.appendMarkdown(item.documentation);
-		} else if (item.documentation.value) {
-			markdown.appendMarkdown(item.documentation.value);
-		}
-	}
-
-	if ('parameters' in item && item.parameters) {
-		markdown.appendMarkdown('\n\n**参数:**\n');
-		for (const param of item.parameters) {
-			if (param.label && param.type && param.detail) {
-				markdown.appendMarkdown(`- \`${param.label}\` *(${param.type})*: ${param.detail}${param.required ? ' (必填)' : ''}\n`);
-			}
-		}
-	}
-
-	if ('returnType' in item && item.returnType) {
-		const returnType = item.returnType;
-		if (returnType.type) {
-			markdown.appendMarkdown(`\n\n**返回值:** *(${returnType.type})*`);
-			if (returnType.documentation) {
-				markdown.appendMarkdown(`\n${returnType.documentation}`);
-			}
-		}
-	}
-
-	return markdown;
-}
-
-function createHover(item: ConfigItem): vscode.Hover {
-	return new vscode.Hover(createMarkdownString(item));
-}
-
-function getCompletionItemKind(kind: string): vscode.CompletionItemKind {
-	switch (kind) {
-		case 'Module':
-			return vscode.CompletionItemKind.Module;
-		case 'Function':
-			return vscode.CompletionItemKind.Function;
-		case 'Variable':
-			return vscode.CompletionItemKind.Variable;
-		case 'Method':
-			return vscode.CompletionItemKind.Method;
-		case 'Property':
-			return vscode.CompletionItemKind.Property;
-		default:
-			return vscode.CompletionItemKind.Text;
-	}
-}
-
-export function activate(context: vscode.ExtensionContext) {
-	console.log('zbcx-helper 已激活');
-	console.log('当前工作目录:', __dirname);
-
-	// 注册zbcx命令
-	let zbcxCommand = vscode.commands.registerCommand('zbcx-helper.zbcx', () => {
-		vscode.window.showInformationMessage(`欢迎使用${pkg.displayName} v${pkg.version}`);
-	});
-
-	context.subscriptions.push(
-		zbcxCommand,
-		cxTriggerProvider, 
-		provider, 
-		subModuleProvider, 
-		hoverProvider,
-		tagCompletionProvider,
-		tagHoverProvider
-	);
-}
-
-export function deactivate() {}
