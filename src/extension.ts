@@ -16,6 +16,10 @@ export async function activate(context: vscode.ExtensionContext) {
     console.log('正在激活组件助手扩展...');
 
     try {
+        // 获取插件版本号
+        const packageJson = require('../package.json');
+        const version = packageJson.version;
+
         // 创建文档管理器
         outputChannel.appendLine('正在初始化文档管理器...');
         const documentManager = new DocumentManager(context.extensionUri);
@@ -42,20 +46,8 @@ export async function activate(context: vscode.ExtensionContext) {
         outputChannel.appendLine('正在注册 zbcx 命令...');
         let zbcxCommand = vscode.commands.registerCommand('zbcx-helper.zbcx', () => {
             outputChannel.appendLine('执行 zbcx 命令');
-            const editor = vscode.window.activeTextEditor;
-            if (editor) {
-                const position = editor.selection.active;
-                editor.edit(editBuilder => {
-                    // 删除已输入的 zbcx
-                    const range = new vscode.Range(
-                        new vscode.Position(position.line, position.character - 4),
-                        position
-                    );
-                    editBuilder.delete(range);
-                    // 插入 <cx-
-                    editBuilder.insert(new vscode.Position(position.line, position.character - 4), '<cx-');
-                });
-            }
+            // 显示欢迎消息
+            vscode.window.showInformationMessage(`欢迎使用智博创享助手v${version}!`);
         });
 
         // 注册提供者
@@ -89,7 +81,7 @@ export async function activate(context: vscode.ExtensionContext) {
         console.log('组件助手扩展激活成功');
         
         // 显示通知
-        vscode.window.showInformationMessage('智博创享助手已激活');
+        vscode.window.showInformationMessage(`智博创享助手v${version}已激活`);
     } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         outputChannel.appendLine(`组件助手激活失败: ${message}`);
