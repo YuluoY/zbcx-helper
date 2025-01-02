@@ -1,8 +1,8 @@
 {
   "name": "zbcx-helper",
-  "displayName": "智博创享助手",
+  "displayName": "zbcx-helper",
   "description": "智博创享Web产品研发组件代码补全智能提示插件",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "EricHu",
   "author": {
     "name": "Eric Hu",
@@ -19,6 +19,7 @@
   "keywords": [
     "智博创享",
     "代码补全",
+    "zbcx",
     "Vue"
   ],
   "activationEvents": [

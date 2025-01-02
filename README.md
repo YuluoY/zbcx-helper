@@ -1,6 +1,6 @@
 # zbcx-helper (智博创享助手)
 
-[![Version](https://img.shields.io/badge/version-1.0.2-blue.svg)](https://marketplace.visualstudio.com/items?itemName=EricHu.zbcx-helper)
+[![Version](https://img.shields.io/badge/version-1.0.3-blue.svg)](https://marketplace.visualstudio.com/items?itemName=EricHu.zbcx-helper)
 [![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/YuluoY/zbcx-helper/blob/main/LICENSE)
 [![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-blue.svg)](https://marketplace.visualstudio.com/items?itemName=EricHu.zbcx-helper)
 
